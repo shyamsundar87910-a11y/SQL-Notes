@@ -1,0 +1,65 @@
+-- ===================== 21_CTES.sql =====================
+
+
+-- .........................Simple CTE.........................--
+WITH employee_data AS (
+    SELECT *
+    FROM employees
+)
+SELECT *
+FROM employee_data;
+
+
+-- .........................CTE with WHERE.........................--
+WITH high_salary AS (
+    SELECT *
+    FROM employees
+    WHERE salary > 30000
+)
+SELECT *
+FROM high_salary;
+
+
+-- .........................CTE with Average Salary.........................--
+WITH salary_data AS (
+    SELECT AVG(salary) AS average_salary
+    FROM employees
+)
+SELECT *
+FROM salary_data;
+
+
+-- .........................CTE with Calculation.........................--
+WITH employee_salary AS (
+    SELECT
+        name,
+        salary,
+        salary * 12 AS annual_salary
+    FROM employees
+)
+SELECT *
+FROM employee_salary;
+
+
+-- .........................CTE with GROUP BY.........................--
+WITH age_salary AS (
+    SELECT
+        age,
+        AVG(salary) AS average_salary
+    FROM employees
+    GROUP BY age
+)
+SELECT *
+FROM age_salary
+ORDER BY average_salary DESC;
+
+
+-- .........................CTE with WHERE and ORDER BY.........................--
+WITH high_salary AS (
+    SELECT name, salary
+    FROM employees
+    WHERE salary > 28000
+)
+SELECT *
+FROM high_salary
+ORDER BY salary DESC;
